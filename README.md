@@ -12,7 +12,7 @@ git submodule add git@bitbucket.org:networm/infinity.build.git Infinity.Build
 
 ```
 cd Infinity.Build
-ruby build.rb
+ruby build.rb # build release by default
 ```
 
 ## Help
