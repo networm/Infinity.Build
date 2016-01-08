@@ -40,6 +40,13 @@ def codesign_end()
   run "security delete-keychain \"#{KEYCHAIN_NAME}\""
 end
 
+def get_identity()
+  ## retrieve identity
+  dump = `security dump-keychain \"#{KEYCHAIN_NAME}\"`
+  line = dump.match(/^\s+\"alis\"\<blob\>\=\"(.*)\"$/)
+  return line.to_s.gsub(/^\s+\"alis\"\<blob\>\=\"(.*)\"$/, '\1')
+end
+
 def xcode(profile, p12, p12_password, xcode_project, type, version, product_name)
   log "Xcode build begin"
 
@@ -49,15 +56,21 @@ def xcode(profile, p12, p12_password, xcode_project, type, version, product_name
 
   codesign_begin(p12, p12_password)
 
+  code_sign_identity = get_identity()
+
   # build xcode project and codesign
   xcode_project_path = xcode_project + "/Unity-iPhone.xcodeproj"
+
   if type == :develop then
     configuration = "Debug"
   else
     configuration = "Release"
   end
-  run "xcodebuild clean -project \"#{xcode_project_path}\" -configuration \"#{configuration}\""
-  run "xcodebuild build -project \"#{xcode_project_path}\" -configuration \"#{configuration}\""
+
+  run "xcodebuild clean -project \"#{xcode_project_path}\" -configuration \"#{configuration}\" \
+      -target \"Unity-iPhone\" CODE_SIGN_IDENTITY=\"#{code_sign_identity}\""
+  run "xcodebuild build -project \"#{xcode_project_path}\" -configuration \"#{configuration}\" \
+      -target \"Unity-iPhone\" CODE_SIGN_IDENTITY=\"#{code_sign_identity}\""
 
   # package application
   type = type == :develop ? "Develop" : "Release"
