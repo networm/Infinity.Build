@@ -77,7 +77,7 @@ class OptParse
       end
 
       opts.on("--xcode-project [DIR]",
-              "XCode project dir") do |xcode_project|
+              "Xcode project dir") do |xcode_project|
         options.xcode_project = xcode_project
       end
 
