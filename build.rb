@@ -3,6 +3,7 @@
 require "./lib/options.rb"
 require "./lib/common.rb"
 require "./lib/unity3d.rb"
+require "./lib/plist.rb"
 require "./lib/xcode.rb"
 require "./lib/clean.rb"
 
