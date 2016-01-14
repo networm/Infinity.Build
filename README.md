@@ -35,6 +35,10 @@ cd Infinity.Build
 ruby build.rb --help
 ```
 
+## Introduction
+
+[Introduction (Chinese Simplified)](https://github.com/networm/Infinity.Build/wiki/Introduction)
+
 ## Environment
 
 ```
