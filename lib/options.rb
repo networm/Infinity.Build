@@ -20,6 +20,8 @@ class OptParse
     options.p12 = ""
     options.p12_password = ""
     options.profile = ""
+    options.teamid = ""
+    options.ios_deployment = "app-store"
     options.unity3d = "/Applications/Unity/Unity.app/Contents/MacOS/Unity"
     options.unity3d_project = ""
     options.xcode_project = ""
@@ -64,6 +66,16 @@ class OptParse
       opts.on("--profile [PROFILE]",
               "PROFILE") do |profile|
         options.profile = profile
+      end
+
+      opts.on("--teamid [TEAMID]",
+              "team ID") do |teamid|
+        options.teamid = teamid
+      end
+
+      opts.on("--ios-deployment [DEPLOYMENT]", ["app-store", "ad-hoc", "development"],
+              "Select ios deployment (app-store, ad-hoc, development)") do |ios_deployment|
+        options.ios_deployment = ios_deployment
       end
 
       opts.on("--unity3d [PATH]",

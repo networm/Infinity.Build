@@ -28,15 +28,19 @@ def options_check(options)
     end
 
     if options.p12.empty? then
-      p12 = File.expand_path("~/Documents/Develop/Develop.p12")
+      p12 = File.expand_path("~/Documents/Develop/Distribution.p12")
 
       if File.exist?(p12) then
-        puts "test " + p12
         options.p12 = p12
       else
         error "P12 empty!"
         return false
       end
+    end
+
+    if options.profile.empty? then
+      error "provisioning profile doesn't exist!"
+      return false
     end
   end
 
@@ -71,7 +75,7 @@ def main
 
     xcode(options.profile, options.p12, options.p12_password,
       options.xcode_project, options.type, options.version,
-      product_name(options.unity3d_project))
+      product_name(options.unity3d_project), options.ios_deployment)
   when :android then
     # TODO
   when :osx then

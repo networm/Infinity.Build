@@ -25,12 +25,8 @@ def adhoc_export_options(teamid, options_dir)
   return options_path
 end
 
-def clean_export_options()
-  if File.exist?(AppStoreExportOptions) then
-    system("rm #{AppStoreExportOptions}")
-  end
-
-  if File.exist?(AdHocExportOptions) then
-    system("rm #{AdHocExportOptions}")
+def clean_export_options(options_path)
+  if File.exist?(options_path) then
+    system("rm #{options_path}")
   end
 end
