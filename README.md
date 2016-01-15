@@ -4,17 +4,13 @@ Build Unity3d project to ios, android, osx, win64 platforms.
 
 ## Install
 
-### Infinity.Build
-
-First, you need to install this.
+First, you need to clone this outside your project.
 
 ```
-git submodule add git@bitbucket.org:networm/infinity.build.git Infinity.Build
+git clone git@github.com:networm/Infinity.Build.git
 ```
 
-### Infinity.BuildInUnity3d
-
-Second, you need install helper in Unity3d.
+Second, you need install Infinity.BuildInUnity3d in Unity3d.
 
 ```
 cd YourUnity3dProject
@@ -25,7 +21,7 @@ git submodule add git@github.com:networm/Infinity.BuildInUnity3d.git Assets/Edit
 
 ```
 cd Infinity.Build
-ruby build.rb --platform ios --type develop --build-version 1.0.0.0 --p12 "YOUR_P12_PATH" --p12-password "YOUR_P12_PASSWORD" --profile "YOUR_MOBILEPROFILE_PATH" --ios-deployment app-store
+ruby build.rb --platform ios --type release --unity3d-project "YOUR_UNITY3D_PROJECT_DIR" --deployment app-store --build 1.0.0.0 --p12 "YOUR_P12_PATH" --p12-password "YOUR_P12_PASSWORD" --provision "YOUR_PROVISION_PATH"
 ```
 
 ## Help
