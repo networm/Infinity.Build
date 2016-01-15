@@ -97,6 +97,10 @@ class OptParse
         options.verbose = v
       end
 
+      opts.on("-n", "--dry-run", "Don't actually do anything, just show what would be done!") do |v|
+        $dryrun = true
+      end
+
       opts.separator ""
       opts.separator "Common options:"
 

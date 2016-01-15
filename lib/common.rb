@@ -2,7 +2,9 @@
 
 def run(command)
   puts "Run: " + command
-  system command
+  if !$dryrun then
+    system command
+  end
 end
 
 def log(content)
