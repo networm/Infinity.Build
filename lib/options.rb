@@ -73,7 +73,7 @@ class OptParse
         options.teamid = teamid
       end
 
-      opts.on("--ios-deployment [DEPLOYMENT]", ["app-store", "ad-hoc", "development"],
+      opts.on("--ios-deployment [DEPLOY]", ["app-store", "ad-hoc", "development"],
               "Select ios deployment (app-store, ad-hoc, development)") do |ios_deployment|
         options.ios_deployment = ios_deployment
       end
@@ -92,6 +92,8 @@ class OptParse
               "Xcode project dir") do |xcode_project|
         options.xcode_project = xcode_project
       end
+
+      opts.separator ""
 
       opts.on("--[no-]verbose", "Run verbosely") do |v|
         options.verbose = v
