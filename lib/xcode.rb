@@ -87,10 +87,9 @@ def xcode(profile, p12, p12_password, xcode_project, type, version, product_name
 
   xcode_project_path = xcode_project + "/Unity-iPhone.xcodeproj"
 
+  codesign_begin(p12, p12_password)
   code_sign_identity = get_identity()
   uuid = profile_uuid(profile)
-
-  codesign_begin(p12, p12_password)
 
   # clean
   run "xcodebuild clean -project \"#{xcode_project_path}\" -configuration \"#{configuration}\" \
