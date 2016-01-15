@@ -69,7 +69,7 @@ class OptParse
       end
 
       opts.on("--teamid [TEAMID]",
-              "team ID") do |teamid|
+              "Team ID. Defaults use team id in P12") do |teamid|
         options.teamid = teamid
       end
 

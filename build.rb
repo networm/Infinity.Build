@@ -75,7 +75,8 @@ def main
 
     xcode(options.profile, options.p12, options.p12_password,
       options.xcode_project, options.type, options.version,
-      product_name(options.unity3d_project), options.ios_deployment)
+      product_name(options.unity3d_project), options.ios_deployment,
+      options.teamid)
   when :android then
     # TODO
   when :osx then

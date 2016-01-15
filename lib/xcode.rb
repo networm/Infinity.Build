@@ -69,7 +69,7 @@ def set_bundleversion(xcode_project, version)
   run "/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion '#{version}'\" #{info_plist}"
 end
 
-def xcode(profile, p12, p12_password, xcode_project, type, version, product_name, ios_deployment)
+def xcode(profile, p12, p12_password, xcode_project, type, version, product_name, ios_deployment, teamid)
   log "Xcode build begin"
 
   # set bundle Version
@@ -91,6 +91,10 @@ def xcode(profile, p12, p12_password, xcode_project, type, version, product_name
   code_sign_identity = get_identity()
   uuid = profile_uuid(profile)
 
+  if teamid.empty? then
+    teamid = get_teamid()
+  end
+
   # clean
   run "xcodebuild clean -project \"#{xcode_project_path}\" -configuration \"#{configuration}\" \
       -target \"Unity-iPhone\" CODE_SIGN_IDENTITY=\"#{code_sign_identity}\""
@@ -98,7 +102,7 @@ def xcode(profile, p12, p12_password, xcode_project, type, version, product_name
   case ios_deployment
   when "app-store" then
     archive_path = xcode_project + "/build/" + product_name.to_s + ".xcarchive"
-    export_options_plist = appstore_export_options(get_teamid(), xcode_project)
+    export_options_plist = appstore_export_options(teamid, xcode_project)
     # xcodebuild tool has wrong exportPath parameter, it should be exportDir actually.
     export_path = xcode_project + "/build/"
 
@@ -108,7 +112,7 @@ def xcode(profile, p12, p12_password, xcode_project, type, version, product_name
 
   when "ad-hoc" then
     archive_path = xcode_project + "/build/" + product_name.to_s + ".xcarchive"
-    export_options_plist = adhoc_export_options(get_teamid(), xcode_project)
+    export_options_plist = adhoc_export_options(teamid, xcode_project)
     # xcodebuild tool has wrong exportPath parameter, it should be exportDir actually.
     export_path = xcode_project + "/build/"
 
