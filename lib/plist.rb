@@ -7,10 +7,10 @@ AdHocExportOptions = "AdHocExportOptions.plist"
 def appstore_export_options(teamid, options_dir)
   options_path = File.expand_path(options_dir + "/" + AppStoreExportOptions)
 
-  system("#{PlistBuddy} -c \"Add :method string 'app-store'\" #{options_path}")
-  system("#{PlistBuddy} -c \"Add :uploadBitcode bool NO\" #{options_path}")
-  system("#{PlistBuddy} -c \"Add :uploadSymbols bool YES\" #{options_path}")
-  system("#{PlistBuddy} -c \"Add :teamID string '#{teamid}'\" #{options_path}")
+  run("#{PlistBuddy} -c \"Add :method string 'app-store'\" #{options_path}")
+  run("#{PlistBuddy} -c \"Add :uploadBitcode bool NO\" #{options_path}")
+  run("#{PlistBuddy} -c \"Add :uploadSymbols bool YES\" #{options_path}")
+  run("#{PlistBuddy} -c \"Add :teamID string '#{teamid}'\" #{options_path}")
 
   return options_path
 end
@@ -18,15 +18,15 @@ end
 def adhoc_export_options(teamid, options_dir)
   options_path = File.expand_path(options_dir + "/" + AdHocExportOptions)
 
-  system("#{PlistBuddy} -c \"Add :method string 'ad-hoc'\" #{options_path}")
-  system("#{PlistBuddy} -c \"Add :compileBitcode bool NO\" #{options_path}")
-  system("#{PlistBuddy} -c \"Add :teamID string '#{teamid}'\" #{options_path}")
+  run("#{PlistBuddy} -c \"Add :method string 'ad-hoc'\" #{options_path}")
+  run("#{PlistBuddy} -c \"Add :compileBitcode bool NO\" #{options_path}")
+  run("#{PlistBuddy} -c \"Add :teamID string '#{teamid}'\" #{options_path}")
 
   return options_path
 end
 
 def clean_export_options(options_path)
   if File.exist?(options_path) then
-    system("rm #{options_path}")
+    run("rm #{options_path}")
   end
 end
